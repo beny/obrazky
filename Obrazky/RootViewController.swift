@@ -91,7 +91,7 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate {
 
         let image = images[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as ImageCell
-        cell.imageView.setImageWithURL(image.obrazkyURL, placeholderImage: UIImage(named: "default-placeholder"))
+        cell.imageView.setImageWithURL(image.originURL, placeholderImage: UIImage(named: "default-placeholder"))
         return cell
     }
 

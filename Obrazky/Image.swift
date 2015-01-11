@@ -28,7 +28,7 @@ class Image {
             self.size = CGSizeMake(0, 0)
         }
 
-        if let URL = NSURL(string: obrazkyURL + "&width=200") {
+        if let URL = NSURL(string: obrazkyURL) {
             self.obrazkyURL = URL
         }
 

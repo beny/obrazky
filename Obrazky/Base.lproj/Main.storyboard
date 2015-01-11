@@ -42,7 +42,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searchHeader" id="gpL-MM-WDD" customClass="SearchHeader" customModule="Obrazky" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search " translatesAutoresizingMaskIntoConstraints="NO" id="s3z-lH-dqN">
