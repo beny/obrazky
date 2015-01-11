@@ -28,10 +28,6 @@ class Request: NSMutableURLRequest {
         var error: NSError?
         let request = AFHTTPRequestSerializer().requestWithMethod("GET", URLString: baseURL, parameters: params, error: &error)
 
-        // FIXME: debug start
-        println("\(request.allHTTPHeaderFields)")
-        // FIXME: debug end
-
         if (error != nil) {
             return nil
         }

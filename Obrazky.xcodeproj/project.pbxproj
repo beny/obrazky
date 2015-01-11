@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8ED75D62D89794AE2ED18B63 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F4F9D7117CC068D370B16 /* libPods.a */; };
+		B98609151A626A5A000FFD25 /* SearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98609141A626A5A000FFD25 /* SearchHeader.swift */; };
 		B9B4824F1A624AB000045460 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B4824E1A624AB000045460 /* Resource.swift */; };
 		B9B482521A624ADE00045460 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B482511A624ADE00045460 /* Request.swift */; };
 		B9B482551A624FF000045460 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B482541A624FF000045460 /* Image.swift */; };
@@ -23,6 +24,7 @@
 		25B4E5357578853FDEAEAA88 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		53867B989CF54D254953728A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B94F53031A616E71001C3AB3 /* Obrazky-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Obrazky-Bridging-Header.h"; sourceTree = "<group>"; };
+		B98609141A626A5A000FFD25 /* SearchHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHeader.swift; sourceTree = "<group>"; };
 		B9B4824E1A624AB000045460 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		B9B482511A624ADE00045460 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		B9B482541A624FF000045460 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B9B482571A62660B00045460 /* ImageCell.swift */,
+				B98609141A626A5A000FFD25 /* SearchHeader.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				B9B482521A624ADE00045460 /* Request.swift in Sources */,
 				B9CC92CE1A616122005F17F0 /* AppDelegate.swift in Sources */,
 				B9CC92FC1A616BA9005F17F0 /* RootViewController.swift in Sources */,
+				B98609151A626A5A000FFD25 /* SearchHeader.swift in Sources */,
 				B9B482551A624FF000045460 /* Image.swift in Sources */,
 				B9B482581A62660B00045460 /* ImageCell.swift in Sources */,
 			);
@@ -379,6 +383,7 @@
 				INFOPLIST_FILE = Obrazky/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Obrazky/Obrazky-Bridging-Header.h";
 			};

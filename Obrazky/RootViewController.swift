@@ -1,5 +1,3 @@
-
-
 //
 //  RootViewController.swift
 //  Obrazky
@@ -10,21 +8,25 @@
 
 import UIKit
 
-class RootViewController: UICollectionViewController {
+class RootViewController: UICollectionViewController, UISearchBarDelegate {
 
     var images = Array<Image>()
     var session = Resource().session
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        fetchData()
+    // MARK: - Actions
+
+    @IBAction func backgroundTapped(sender: AnyObject) {
+        view.endEditing(true)
     }
 
     // MARK: - Auxiliary
 
-    func fetchData() {
-        let request = Request.searchAjaxRequest("bunny")
+    func fetchData(query: String) {
+        let request = Request.searchAjaxRequest(query)
         session.dataTaskWithRequest(request, completionHandler: { (response, data, error) -> Void in
             if let data = data as? NSData {
 
@@ -66,6 +68,7 @@ class RootViewController: UICollectionViewController {
                             let matchesObrazkyURL = regexObrazkyURL?.matchesInString(boxes, options: nil, range: NSMakeRange(0, boxes.length)) as Array<NSTextCheckingResult>
                             let obrazkyURLs: Array<String> = matchesObrazkyURL.map { boxes.substringWithRange($0.rangeAtIndex(1)) }
 
+                            self.images.removeAll(keepCapacity: false)
                             for (index, title) in enumerate(titles) {
                                 let image = Image(title: title, size: sizes[index], obrazkyURL: obrazkyURLs[index], originURL: originURLs[index])
                                 self.images.append(image)
@@ -88,9 +91,37 @@ class RootViewController: UICollectionViewController {
 
         let image = images[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as ImageCell
-        cell.imageView.setImageWithURL(image.obrazkyURL)
+        cell.imageView.setImageWithURL(image.obrazkyURL, placeholderImage: UIImage(named: "default-placeholder"))
         return cell
     }
 
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "searchHeader", forIndexPath: indexPath) as SearchHeader
+        return view
+    }
+
     // MARK: - Collection view delegate
+
+    // MARK: - Search bar delegate
+
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+
+    }
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+
+        if searchText.isEmpty {
+            images.removeAll(keepCapacity: false)
+            self.collectionView?.reloadData()
+        }
+    }
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        fetchData(searchBar.text)
+    }
+
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    }
+
+
 }
