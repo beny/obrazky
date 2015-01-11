@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootViewController: UICollectionViewController, UISearchBarDelegate {
+class RootViewController: UICollectionViewController, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
 
     var images = Array<Image>()
     var session = Resource().session
@@ -91,7 +91,16 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate {
 
         let image = images[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as ImageCell
+        cell.imageView.contentMode = .ScaleAspectFill
+        // obrazkyURL?.imageURL(Int(UIScreen.mainScreen().nativeBounds.size.width)
         cell.imageView.setImageWithURL(image.originURL, placeholderImage: UIImage(named: "default-placeholder"))
+        cell.titleLabel.text = image.title
+        cell.sizeLabel.text = "\(Int(image.size.width))x\(Int(image.size.height))"
+//        #if DEBUG
+//            // FIXME: debug
+//            cell.layer.borderColor = UIColor.greenColor().CGColor
+//            cell.layer.borderWidth = 1
+//        #endif
         return cell
     }
 
@@ -101,6 +110,35 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate {
     }
 
     // MARK: - Collection view delegate
+
+    // MARK: - Collection view layout
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+
+        let image = images[indexPath.row]
+
+
+        let screenSize = UIScreen.mainScreen().bounds.size
+        var width = screenSize.width
+        let margin: CGFloat = 8
+
+        // for smaller screens on portrait
+        if screenSize.width < 400 {
+            width = width - 2 * margin
+        }
+        else if screenSize.width < 700 {
+            width = (screenSize.width / 2) - 4 * margin
+        }
+        else {
+            width = (screenSize.width / 3) - 6 * margin
+        }
+
+        return CGSizeMake(width, width / image.ratio + 21)
+    }
+
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        collectionView?.performBatchUpdates(nil, completion: nil)
+    }
 
     // MARK: - Search bar delegate
 

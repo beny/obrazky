@@ -15,6 +15,12 @@ class Image {
     var obrazkyURL: NSURL?
     var originURL: NSURL?
 
+    var ratio: CGFloat {
+        get {
+            return self.size.width / self.size.height
+        }
+    }
+
     init(title: String, size: String, obrazkyURL: String, originURL: String) {
         self.title = title
 
