@@ -73,6 +73,7 @@
                                     <outlet property="imageView" destination="kFt-rK-wCH" id="Ige-ZO-GmV"/>
                                     <outlet property="sizeLabel" destination="QnN-Sq-Zi3" id="PbS-fD-7yJ"/>
                                     <outlet property="titleLabel" destination="eCA-90-6ea" id="964-dR-sV0"/>
+                                    <segue destination="mPE-o3-Onj" kind="custom" id="rPW-WK-R8n"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -101,18 +102,56 @@
                         <connections>
                             <outlet property="dataSource" destination="m3o-VD-E1V" id="qI4-Co-jI9"/>
                             <outlet property="delegate" destination="m3o-VD-E1V" id="PUJ-fC-GYw"/>
-                            <outletCollection property="gestureRecognizers" destination="BRL-zA-E76" appends="YES" id="3tv-uT-5Fs"/>
                         </connections>
                     </collectionView>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHX-sG-t9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="BRL-zA-E76">
-                    <connections>
-                        <action selector="backgroundTapped:" destination="m3o-VD-E1V" id="hhR-di-kCX"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-61" y="-158"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="viu-Mg-R2I">
+            <objects>
+                <navigationController id="mPE-o3-Onj" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="5GQ-pL-RLS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="v7o-mw-NTw" kind="relationship" relationship="rootViewController" id="phU-ID-YH1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Bs-K6-XTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="729" y="-158"/>
+        </scene>
+        <!--Detail Controller-->
+        <scene sceneID="3j6-rW-Psi">
+            <objects>
+                <viewController id="v7o-mw-NTw" customClass="DetailController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="knH-um-ken"/>
+                        <viewControllerLayoutGuide type="bottom" id="LjR-Ej-HaH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ra5-IF-6aC">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JgW-QA-5Cu">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="zh1-bA-BKt">
+                            <connections>
+                                <segue destination="qnM-Um-QxU" kind="unwind" unwindAction="unwindToViewController:" id="IAa-hz-o3B"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="ERd-3g-mOE"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ky2-kZ-Zck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qnM-Um-QxU" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1522" y="-158"/>
         </scene>
     </scenes>
 </document>

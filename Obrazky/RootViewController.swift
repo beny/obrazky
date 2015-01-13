@@ -12,15 +12,23 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
 
     var images = Array<Image>()
     var session = Resource().session
+    var transitionManager = Animator()
+    var tappedCellFrame: CGRect?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK: - View lifecycle
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let viewController = segue.destinationViewController as UIViewController
+        viewController.transitioningDelegate = transitionManager
+    }
+
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return self.presentingViewController == nil ? .Default : .LightContent
     }
 
     // MARK: - Actions
 
-    @IBAction func backgroundTapped(sender: AnyObject) {
-        view.endEditing(true)
+    @IBAction func unwindToViewController(sender: UIStoryboardSegue) {
     }
 
     // MARK: - Auxiliary
@@ -65,11 +73,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         cell.imageView.setImageWithURL(image.originURL, placeholderImage: UIImage(named: "default-placeholder"))
         cell.titleLabel.text = image.title
         cell.sizeLabel.text = "\(Int(image.size.width))x\(Int(image.size.height))"
-//        #if DEBUG
-//            // FIXME: debug
-//            cell.layer.borderColor = UIColor.greenColor().CGColor
-//            cell.layer.borderWidth = 1
-//        #endif
         return cell
     }
 
@@ -130,5 +133,11 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
     }
 
+    // MARK: - Scroll view delegate
+
+    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        // hide keyboard when starts scrolling
+        self.view.endEditing(true)
+    }
 
 }
