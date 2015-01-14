@@ -31,9 +31,6 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
             setViewControllers([viewController], direction: .Forward, animated: false, completion: nil)
         }
 
-        // show controls after half a second
-        startingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("toggleBarVisibility:"), userInfo: nil, repeats: false)
-
         // add tap gesture recognizer
         let recognizer = UITapGestureRecognizer(target: self, action: Selector("toggleBarVisibility:"))
         view.addGestureRecognizer(recognizer)
@@ -67,6 +64,10 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
     }
 
     // MARK: - Auxiliary
+
+    func startTimer() {
+         startingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("toggleBarVisibility:"), userInfo: nil, repeats: false)
+    }
 
     func findImageIndex(image: Image) -> Int? {
 

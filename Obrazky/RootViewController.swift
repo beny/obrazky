@@ -13,6 +13,7 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     var images = Array<Image>()
     var session = Resource().session
     var animator = Animator()
+    var selectedImageView: UIImageView?
 
     // MARK: - View lifecycle
     
@@ -25,9 +26,10 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                 let navigationController = segue.destinationViewController as UINavigationController
                 navigationController.transitioningDelegate = animator
                 let controller = navigationController.topViewController as DetailViewController
-                controller.transitioningDelegate = animator
                 controller.selectedImage = image
                 controller.images = images
+
+                selectedImageView = cell.imageView
             }
         }
     }
