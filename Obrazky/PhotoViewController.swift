@@ -26,8 +26,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         scrollView.removeConstraints(scrollView.constraints())
         imageView.removeConstraints(imageView.constraints())
         let views = ["scrollView": scrollView, "imageView": imageView]
-//        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: nil, metrics: nil, views: views))
-//        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: nil, metrics: nil, views: views))
         view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0))
     }

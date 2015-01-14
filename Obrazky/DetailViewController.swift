@@ -8,13 +8,19 @@
 
 import UIKit
 
-class DetailViewController: UIPageViewController, UIPageViewControllerDataSource {
+class DetailViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var images: Array<Image> = [Image]()
     var selectedImage: Image?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // self background
+        view.backgroundColor = UIColor.blackColor()
+
+        // add share button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("shareCurrentImage"))
 
         // data source is myself
         dataSource = self
@@ -30,12 +36,14 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.barStyle = .BlackTranslucent
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.barStyle = .Default
     }
 
 
@@ -47,6 +55,16 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
 
     func showNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    func shareCurrentImage() {
+        if let photoController = viewControllers.last as? PhotoViewController {
+            if let image = photoController.imageView.image {
+                let items = [image]
+                let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                presentViewController(activityController, animated: true, completion: nil)
+            }
+        }
     }
 
     // MARK: - Auxiliary
@@ -67,7 +85,7 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         return viewController
     }
 
-    // MARK: - Page view controller delegate
+    // MARK: - Page view controller data source
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 
