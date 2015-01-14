@@ -23,7 +23,8 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         if let cell = selectedCell {
             if let indexPath = collectionView?.indexPathForCell(cell) {
                 let image = images[indexPath.row]
-                let controller = segue.destinationViewController as DetailViewController
+                let navigationController = segue.destinationViewController as UINavigationController
+                let controller = navigationController.topViewController as DetailViewController
                 controller.selectedImage = image
                 controller.images = images
             }
@@ -35,6 +36,9 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     }
 
     // MARK: - Actions
+
+    @IBAction func unwindToViewController(sender: UIStoryboardSegue) {
+    }
 
     // MARK: - Auxiliary
 

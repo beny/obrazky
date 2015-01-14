@@ -104,7 +104,7 @@
                         </view>
                     </navigationItem>
                     <connections>
-                        <segue destination="RYL-oG-4hd" kind="show" identifier="showDetail" id="H7f-OU-KB0"/>
+                        <segue destination="NT9-TP-FGO" kind="custom" identifier="showDetail" id="FWp-uC-T5i"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHX-sG-t9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -127,15 +127,41 @@
             </objects>
             <point key="canvasLocation" x="-762" y="-158"/>
         </scene>
+        <!--Dark Navigation Controller-->
+        <scene sceneID="2un-JS-BX9">
+            <objects>
+                <navigationController id="NT9-TP-FGO" customClass="DarkNavigationController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="LQR-Ey-gKL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="RYL-oG-4hd" kind="relationship" relationship="rootViewController" id="ELW-6z-WBF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rlj-Lt-ORT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="6Hl-kh-jlJ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="63" y="676"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="lvH-qO-Gmx">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="RYL-oG-4hd" customClass="DetailViewController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="cfs-k0-2bI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="bQp-wW-1ns">
+                            <connections>
+                                <segue destination="6Hl-kh-jlJ" kind="unwind" unwindAction="unwindToViewController:" id="7sN-Xe-fL9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="jpx-wL-5C4"/>
+                    </navigationItem>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fr6-KJ-nrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821" y="-158"/>
+            <point key="canvasLocation" x="816" y="676"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="huY-SJ-vHe">
@@ -168,7 +194,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="imageView" destination="bEi-AW-Dxl" id="xtR-0K-Mkl"/>
                         <outlet property="scrollView" destination="z82-ga-m5M" id="2OY-SS-YjH"/>
@@ -181,7 +207,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="821" y="666"/>
+            <point key="canvasLocation" x="1570" y="684"/>
         </scene>
     </scenes>
 </document>

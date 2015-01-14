@@ -12,6 +12,7 @@
 		B957C8C41A6273EA00225D32 /* NSURLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8C31A6273EA00225D32 /* NSURLExtension.swift */; };
 		B957C8CA1A64D08E00225D32 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8C91A64D08E00225D32 /* DetailViewController.swift */; };
 		B957C8CD1A64D8FA00225D32 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8CC1A64D8FA00225D32 /* Animator.swift */; };
+		B98E4CC31A6709F1000944F0 /* DarkNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E4CC21A6709F1000944F0 /* DarkNavigationController.swift */; };
 		B9B4824F1A624AB000045460 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B4824E1A624AB000045460 /* Resource.swift */; };
 		B9B482521A624ADE00045460 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B482511A624ADE00045460 /* Request.swift */; };
 		B9B482551A624FF000045460 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B482541A624FF000045460 /* Image.swift */; };
@@ -31,6 +32,7 @@
 		B957C8C31A6273EA00225D32 /* NSURLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLExtension.swift; sourceTree = "<group>"; };
 		B957C8C91A64D08E00225D32 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B957C8CC1A64D8FA00225D32 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		B98E4CC21A6709F1000944F0 /* DarkNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkNavigationController.swift; sourceTree = "<group>"; };
 		B9B4824E1A624AB000045460 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		B9B482511A624ADE00045460 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		B9B482541A624FF000045460 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				B9CC92FB1A616BA9005F17F0 /* RootViewController.swift */,
 				B957C8C91A64D08E00225D32 /* DetailViewController.swift */,
 				B926AE501A66CDDA00AB257C /* PhotoViewController.swift */,
+				B98E4CC21A6709F1000944F0 /* DarkNavigationController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				B9B4824F1A624AB000045460 /* Resource.swift in Sources */,
 				B9B482521A624ADE00045460 /* Request.swift in Sources */,
 				B9CC92CE1A616122005F17F0 /* AppDelegate.swift in Sources */,
+				B98E4CC31A6709F1000944F0 /* DarkNavigationController.swift in Sources */,
 				B9CC92FC1A616BA9005F17F0 /* RootViewController.swift in Sources */,
 				B957C8CD1A64D8FA00225D32 /* Animator.swift in Sources */,
 				B9B482551A624FF000045460 /* Image.swift in Sources */,

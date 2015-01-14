@@ -34,19 +34,6 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.barStyle = .BlackTranslucent
-    }
-
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barStyle = .Default
-    }
-
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
@@ -69,6 +56,9 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
                 presentViewController(activityController, animated: true, completion: nil)
             }
         }
+    }
+
+    @IBAction func unwindToViewController(sender: UIStoryboardSegue) {
     }
 
     // MARK: - Auxiliary
