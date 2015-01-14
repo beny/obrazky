@@ -13,13 +13,21 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     var images = Array<Image>()
     var session = Resource().session
     var transitionManager = Animator()
-    var tappedCellFrame: CGRect?
+    var selectedCell: ImageCell?
 
     // MARK: - View lifecycle
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewController = segue.destinationViewController as UIViewController
-        viewController.transitioningDelegate = transitionManager
+
+        // choose selected image
+        if let cell = selectedCell {
+            if let indexPath = collectionView?.indexPathForCell(cell) {
+                let image = images[indexPath.row]
+                let controller = segue.destinationViewController as DetailViewController
+                controller.selectedImage = image
+                controller.images = images
+            }
+        }
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -27,9 +35,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     }
 
     // MARK: - Actions
-
-    @IBAction func unwindToViewController(sender: UIStoryboardSegue) {
-    }
 
     // MARK: - Auxiliary
 
@@ -76,12 +81,13 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         return cell
     }
 
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "searchHeader", forIndexPath: indexPath) as SearchHeader
-        return view
-    }
-
     // MARK: - Collection view delegate
+
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+        selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageCell
+        performSegueWithIdentifier("showDetail", sender: nil)
+    }
 
     // MARK: - Collection view layout
 

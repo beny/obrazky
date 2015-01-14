@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Image {
+class Image: Equatable {
 
     var title: String
     var size: CGSize
@@ -42,4 +42,8 @@ class Image {
             self.originURL = URL
         }
     }
+}
+
+func ==(lhs: Image, rhs: Image) -> Bool {
+    return lhs.obrazkyURL == rhs.obrazkyURL
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8ED75D62D89794AE2ED18B63 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E68F4F9D7117CC068D370B16 /* libPods.a */; };
+		B926AE511A66CDDA00AB257C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B926AE501A66CDDA00AB257C /* PhotoViewController.swift */; };
 		B957C8C41A6273EA00225D32 /* NSURLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8C31A6273EA00225D32 /* NSURLExtension.swift */; };
 		B957C8CA1A64D08E00225D32 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8C91A64D08E00225D32 /* DetailViewController.swift */; };
 		B957C8CD1A64D8FA00225D32 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B957C8CC1A64D8FA00225D32 /* Animator.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		25B4E5357578853FDEAEAA88 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		53867B989CF54D254953728A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B926AE501A66CDDA00AB257C /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		B94F53031A616E71001C3AB3 /* Obrazky-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Obrazky-Bridging-Header.h"; sourceTree = "<group>"; };
 		B957C8C31A6273EA00225D32 /* NSURLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLExtension.swift; sourceTree = "<group>"; };
 		B957C8C91A64D08E00225D32 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				B9CC92FB1A616BA9005F17F0 /* RootViewController.swift */,
 				B957C8C91A64D08E00225D32 /* DetailViewController.swift */,
+				B926AE501A66CDDA00AB257C /* PhotoViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				B957C8CD1A64D8FA00225D32 /* Animator.swift in Sources */,
 				B9B482551A624FF000045460 /* Image.swift in Sources */,
 				B9B482581A62660B00045460 /* ImageCell.swift in Sources */,
+				B926AE511A66CDDA00AB257C /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
