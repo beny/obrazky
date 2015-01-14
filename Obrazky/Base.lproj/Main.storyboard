@@ -156,8 +156,13 @@
                                 <segue destination="6Hl-kh-jlJ" kind="unwind" unwindAction="unwindToViewController:" id="7sN-Xe-fL9"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="jpx-wL-5C4"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="jpx-wL-5C4">
+                            <connections>
+                                <action selector="shareCurrentImage" destination="RYL-oG-4hd" id="Upj-Gs-0X5"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fr6-KJ-nrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,7 +192,6 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="xLW-sC-o8t" id="Y5d-jt-GZ9"/>
-                                    <outletCollection property="gestureRecognizers" destination="WJY-Pf-ZtE" appends="YES" id="cTi-KY-waZ"/>
                                 </connections>
                             </scrollView>
                         </subviews>
@@ -201,11 +205,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMW-Ei-rrl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="WJY-Pf-ZtE">
-                    <connections>
-                        <action selector="toggleBarVisibility:" destination="xLW-sC-o8t" id="VKJ-Be-4ko"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1570" y="684"/>
         </scene>

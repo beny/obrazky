@@ -38,20 +38,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    // MARK: - Actions
-
-    @IBAction func toggleBarVisibility(sender: AnyObject) {
-
-        if let navigationController = navigationController {
-            if navigationController.navigationBarHidden {
-                navigationController.setNavigationBarHidden(false, animated: true)
-            }
-            else {
-                navigationController.setNavigationBarHidden(true, animated: true)
-            }
-        }
-    }
-
     // MARK: - Scroll view delegate
 
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {

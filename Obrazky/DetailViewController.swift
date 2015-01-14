@@ -12,6 +12,7 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
 
     var images: Array<Image> = [Image]()
     var selectedImage: Image?
+    var startingTimer: NSTimer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +22,6 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         // self background
         view.backgroundColor = UIColor.blackColor()
 
-        // add share button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("shareCurrentImage"))
-
         // data source is myself
         dataSource = self
 
@@ -32,6 +30,13 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
             let viewController = viewControllerForImage(image)
             setViewControllers([viewController], direction: .Forward, animated: false, completion: nil)
         }
+
+        // show controls after half a second
+        startingTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("toggleBarVisibility:"), userInfo: nil, repeats: false)
+
+        // add tap gesture recognizer
+        let recognizer = UITapGestureRecognizer(target: self, action: Selector("toggleBarVisibility:"))
+        view.addGestureRecognizer(recognizer)
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -40,15 +45,15 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
 
     // MARK: - Actions
 
-    func hideNavigationBar() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
+    @IBAction func toggleBarVisibility(sender: AnyObject) {
+        startingTimer?.invalidate()
+
+        let navigationController = self.navigationController!
+        let hidden = navigationController.navigationBarHidden
+        navigationController.setNavigationBarHidden(!hidden, animated: true)
     }
 
-    func showNavigationBar() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-
-    func shareCurrentImage() {
+    @IBAction func shareCurrentImage() {
         if let photoController = viewControllers.last as? PhotoViewController {
             if let image = photoController.imageView.image {
                 let items = [image]
