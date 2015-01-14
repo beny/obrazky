@@ -68,62 +68,48 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning, UIViewControlle
                 transitionView.removeFromSuperview()
                 context.completeTransition(true)
         }
-
-        //        // Create a temporary view for the zoom in transition and set the initial frame based
-        //        // on the reference image view
-        //        UIImageView *transitionView = [[UIImageView alloc] initWithImage:self.referenceImageView.image];
-        //        transitionView.contentMode = UIViewContentModeScaleAspectFill;
-        //        transitionView.clipsToBounds = YES;
-        //        transitionView.frame = [transitionContext.containerView convertRect:self.referenceImageView.bounds
-        //            fromView:self.referenceImageView];
-        //        [transitionContext.containerView addSubview:transitionView];
-        //
-        //        // Compute the final frame for the temporary view
-        //        CGRect finalFrame = [transitionContext finalFrameForViewController:toViewController];
-        //        CGRect transitionViewFinalFrame = [self.referenceImageView.image tgr_aspectFitRectForSize:finalFrame.size];
-        //
-        //        // Perform the transition using a spring motion effect
-        //        NSTimeInterval duration = [self transitionDuration:transitionContext];
-        //
-        //        self.referenceImageView.alpha = 0;
-        //
-        //        [UIView animateWithDuration:duration
-        //            delay:0
-        //            usingSpringWithDamping:0.7
-        //            initialSpringVelocity:0
-        //            options:UIViewAnimationOptionCurveLinear
-        //            animations:^{
-        //            fromViewController.view.alpha = 0;
-        //            transitionView.frame = transitionViewFinalFrame;
-        //            }
-        //            completion:^(BOOL finished) {
-        //            fromViewController.view.alpha = 1;
-        //
-        //            [transitionView removeFromSuperview];
-        //            [transitionContext.containerView addSubview:toViewController.view];
-        //
-        //            [transitionContext completeTransition:YES];
-        //            }];
     }
 
     func animateZoomOut(context: UIViewControllerContextTransitioning) {
+
         let fromNavigationController = context.viewControllerForKey(UITransitionContextFromViewControllerKey)! as UINavigationController
         let detailController = fromNavigationController.topViewController as DetailViewController
+        let photoController = detailController.viewControllers.first as PhotoViewController
         let toNavigationController = context.viewControllerForKey(UITransitionContextToViewControllerKey)! as UINavigationController
         let rootController = toNavigationController.topViewController as RootViewController
 
+        // add both controllers to container
         let container = context.containerView()
         container.addSubview(fromNavigationController.view)
         container.addSubview(toNavigationController.view)
+        container.sendSubviewToBack(toNavigationController.view)
 
-        fromNavigationController.view.alpha = 1
+        // calculate initial and final frame
+        let sourceImageView = detailController.currentViewController()?.imageView!
+        let destinationImageView = rootController.findImageCell(detailController.currentViewController()!.image!)!.imageView
+        let initFrame = sourceImageView!.image!.aspectRatioSize(sourceImageView!.bounds.size)
+        let transitionInitialViewFrame = context.containerView().convertRect(initFrame, fromView: sourceImageView)
+        let finalFrame = context.containerView().convertRect(destinationImageView.bounds, fromView: destinationImageView)
+
+        // create temporary view
+        let transitionView = UIImageView(image: destinationImageView.image)
+        transitionView.contentMode = .ScaleAspectFill
+        transitionView.clipsToBounds = true
+        transitionView.frame = transitionInitialViewFrame
+        container.addSubview(transitionView)
+
         toNavigationController.view.alpha = 0
+        photoController.imageView.alpha = 0
 
         UIView.animateWithDuration(transitionDuration(context), animations: { () -> Void in
             fromNavigationController.view.alpha = 0
             toNavigationController.view.alpha = 1
-        }) { (finished) -> Void in
-            context.completeTransition(true)
+            transitionView.frame = finalFrame
+            }) { (finished) -> Void in
+                fromNavigationController.view.alpha = 1
+                destinationImageView.alpha = 1
+                transitionView.removeFromSuperview()
+                context.completeTransition(true)
         }
     }
 

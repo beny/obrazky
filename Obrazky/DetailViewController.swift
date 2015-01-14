@@ -8,22 +8,29 @@
 
 import UIKit
 
+protocol DetailViewControllerDelegate {
+    func detailSwitchPageToImage(image: Image)
+}
+
 class DetailViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var images: Array<Image> = [Image]()
     var selectedImage: Image?
     var startingTimer: NSTimer?
+    var detailDelegate: DetailViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // initially hide navigation bar
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         // self background
         view.backgroundColor = UIColor.blackColor()
 
-        // data source is myself
+        // data source and delegate is myself
         dataSource = self
+        delegate = self
 
         // prepare starting view controller
         if let image = selectedImage {
@@ -40,14 +47,21 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         return .LightContent
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        // disable timer if running
+        startingTimer?.invalidate()
+    }
+
     // MARK: - Actions
 
     @IBAction func toggleBarVisibility(sender: AnyObject) {
         startingTimer?.invalidate()
 
-        let navigationController = self.navigationController!
-        let hidden = navigationController.navigationBarHidden
-        navigationController.setNavigationBarHidden(!hidden, animated: true)
+        if let navigationController = self.navigationController {
+            let hidden = navigationController.navigationBarHidden
+            navigationController.setNavigationBarHidden(!hidden, animated: true)
+        }
     }
 
     @IBAction func shareCurrentImage() {
@@ -83,6 +97,10 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         viewController.image = image
 
         return viewController
+    }
+
+    func currentViewController() -> PhotoViewController? {
+        return viewControllers.first as? PhotoViewController
     }
 
     // MARK: - Page view controller data source
@@ -126,6 +144,12 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         }
         
         return nil
+    }
+
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        if let controller = currentViewController() {
+            detailDelegate?.detailSwitchPageToImage(controller.image!)
+        }
     }
     
 }

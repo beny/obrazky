@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootViewController: UICollectionViewController, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
+class RootViewController: UICollectionViewController, UISearchBarDelegate, UICollectionViewDelegateFlowLayout, DetailViewControllerDelegate {
 
     var images = Array<Image>()
     var session = Resource().session
@@ -25,9 +25,10 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                 let image = images[indexPath.row]
                 let navigationController = segue.destinationViewController as UINavigationController
                 navigationController.transitioningDelegate = animator
-                let controller = navigationController.topViewController as DetailViewController
-                controller.selectedImage = image
-                controller.images = images
+                let detailController = navigationController.topViewController as DetailViewController
+                detailController.detailDelegate = self
+                detailController.selectedImage = image
+                detailController.images = images
 
                 selectedImageView = cell.imageView
             }
@@ -74,6 +75,16 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
             }
             self.collectionView?.reloadData()
         }).resume()
+    }
+
+    func findImageCell(image: Image) -> ImageCell? {
+        if let imageIndex = find(images, image) {
+            let indexPath = NSIndexPath(forRow: imageIndex, inSection: 0)
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? ImageCell
+            return cell
+        }
+
+        return nil
     }
 
     // MARK: - Collection view data source
@@ -125,10 +136,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
 
     // MARK: - Search bar delegate
 
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-
-    }
-
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
         if searchText.isEmpty {
@@ -141,14 +148,23 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         fetchData(searchBar.text)
     }
 
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-    }
-
     // MARK: - Scroll view delegate
 
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         // hide keyboard when starts scrolling
         self.view.endEditing(true)
+    }
+
+    // MARK: - Detail view controller delegate
+
+    func detailSwitchPageToImage(image: Image) {
+        if let imageIndex = find(images, image) {
+            let indexPath = NSIndexPath(forRow: imageIndex, inSection: 0)
+            collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: false)
+
+            // new layout is needed because otherwise the cell would be offscreen and without frame
+            collectionView?.layoutIfNeeded()
+        }
     }
 
 }
