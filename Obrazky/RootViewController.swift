@@ -53,6 +53,12 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                 var error: NSError?
                 let JSON: AnyObject? = NSJSONSerialization.JSONObjectWithData(fixedData!, options: NSJSONReadingOptions.MutableContainers, error: &error)
 
+                if (error != nil) {
+                    let alert = UIAlertView(title: "Chyba", message: "Došlo k chybě při stahování dat ze serveru. Zkuste prosím hledat znovu", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK")
+                    alert.show()
+                    return
+                }
+
                 // update images
                 self.images.removeAll(keepCapacity: false)
                 if let images = Resource.parseData(JSON) {

@@ -16,6 +16,8 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         // self background
         view.backgroundColor = UIColor.blackColor()
 
@@ -35,7 +37,6 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.navigationBar.barStyle = .BlackTranslucent
     }
 
@@ -46,6 +47,9 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         navigationController?.navigationBar.barStyle = .Default
     }
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 
     // MARK: - Actions
 

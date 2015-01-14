@@ -130,7 +130,7 @@
         <!--Detail View Controller-->
         <scene sceneID="lvH-qO-Gmx">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="RYL-oG-4hd" customClass="DetailViewController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="RYL-oG-4hd" customClass="DetailViewController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fr6-KJ-nrn" userLabel="First Responder" sceneMemberID="firstResponder"/>
