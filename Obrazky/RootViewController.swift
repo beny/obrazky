@@ -12,19 +12,20 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
 
     var images = Array<Image>()
     var session = Resource().session
-    var transitionManager = Animator()
-    var selectedCell: ImageCell?
+    var animator = Animator()
 
     // MARK: - View lifecycle
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         // choose selected image
-        if let cell = selectedCell {
+        if let cell = sender as? ImageCell {
             if let indexPath = collectionView?.indexPathForCell(cell) {
                 let image = images[indexPath.row]
                 let navigationController = segue.destinationViewController as UINavigationController
+                navigationController.transitioningDelegate = animator
                 let controller = navigationController.topViewController as DetailViewController
+                controller.transitioningDelegate = animator
                 controller.selectedImage = image
                 controller.images = images
             }
@@ -89,14 +90,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         cell.titleLabel.text = image.title
         cell.sizeLabel.text = "\(Int(image.size.width))x\(Int(image.size.height))"
         return cell
-    }
-
-    // MARK: - Collection view delegate
-
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageCell
-        performSegueWithIdentifier("showDetail", sender: nil)
     }
 
     // MARK: - Collection view layout

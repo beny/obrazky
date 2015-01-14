@@ -72,6 +72,7 @@
                                     <outlet property="imageView" destination="kFt-rK-wCH" id="Ige-ZO-GmV"/>
                                     <outlet property="sizeLabel" destination="QnN-Sq-Zi3" id="PbS-fD-7yJ"/>
                                     <outlet property="titleLabel" destination="eCA-90-6ea" id="964-dR-sV0"/>
+                                    <segue destination="NT9-TP-FGO" kind="showDetail" id="8Ig-Dl-EbO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -103,9 +104,6 @@
                             </constraints>
                         </view>
                     </navigationItem>
-                    <connections>
-                        <segue destination="NT9-TP-FGO" kind="custom" identifier="showDetail" id="FWp-uC-T5i"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHX-sG-t9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,7 +128,7 @@
         <!--Dark Navigation Controller-->
         <scene sceneID="2un-JS-BX9">
             <objects>
-                <navigationController id="NT9-TP-FGO" customClass="DarkNavigationController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController modalTransitionStyle="crossDissolve" id="NT9-TP-FGO" customClass="DarkNavigationController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="LQR-Ey-gKL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
