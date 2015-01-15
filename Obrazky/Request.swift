@@ -21,9 +21,9 @@ enum Size: String {
 
 class Request: NSMutableURLRequest {
 
-    class func searchAjaxRequest(query: String, from: Int = 0, step: Int = 10, size: Size = .Any, color: Color = .Any) -> NSMutableURLRequest? {
+    class func searchAjaxRequest(query: String, from: Int = 1, step: Int = 10, size: Size = .Any, color: Color = .Any) -> NSMutableURLRequest? {
         let baseURL = "http://obrazky.cz/searchAjax"
-        let params = ["q": query, "s": "", "step": step, "size": "any", "color": "any", "filter": true, "from": 21]
+        let params = ["q": query, "s": "", "step": step, "size": "any", "color": "any", "filter": true, "from": from]
 
         var error: NSError?
         let request = AFHTTPRequestSerializer().requestWithMethod("GET", URLString: baseURL, parameters: params, error: &error)

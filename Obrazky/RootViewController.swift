@@ -15,6 +15,10 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     var animator = Animator()
     var selectedImageView: UIImageView?
 
+    var currentDataPage = 1
+    var currentQuery: String?
+    var currentTask: NSURLSessionDataTask?
+
     // MARK: - View lifecycle
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -46,9 +50,21 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
 
     // MARK: - Auxiliary
 
-    func fetchData(query: String) {
-        let request = Request.searchAjaxRequest(query)
-        session.dataTaskWithRequest(request, completionHandler: { (response, data, error) -> Void in
+    func fetchData(query: String, fetchNextPage: Bool = false) {
+
+        // new search
+        if fetchNextPage {
+            currentDataPage += 1
+        }
+        else {
+            currentDataPage = 1
+        }
+
+        // save current query
+        currentQuery = query
+
+        let request = Request.searchAjaxRequest(query, from: currentDataPage)
+        currentTask = session.dataTaskWithRequest(request, completionHandler: { (response, data, error) -> Void in
             if let data = data as? NSData {
 
                 // fix HTML escaping to be valid JSON
@@ -68,13 +84,39 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                 }
 
                 // update images
-                self.images.removeAll(keepCapacity: false)
-                if let images = Resource.parseData(JSON) {
-                    self.images = images
+                if !fetchNextPage {
+                    // replace all
+                    self.images.removeAll(keepCapacity: false)
+                    if let images = Resource.parseData(JSON) {
+                        self.images = images
+                    }
+                }
+                else {
+                    // append new
+                    if let images = Resource.parseData(JSON) {
+                        for image in images {
+                            self.images.append(image)
+                        }
+                    }
                 }
             }
             self.collectionView?.reloadData()
-        }).resume()
+            self.collectionView?.flashScrollIndicators()
+        })
+
+        // do not run two task at a moment
+        if let task = currentTask {
+            if task.state == .Running {
+                return
+            }
+        }
+
+        // start request
+        if let task = currentTask {
+            task.resume()
+        }
+
+
     }
 
     func findImageCell(image: Image) -> ImageCell? {
@@ -153,6 +195,18 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         // hide keyboard when starts scrolling
         self.view.endEditing(true)
+    }
+
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height
+        let currentPosition = currentOffset/maxOffset * 100
+
+        if currentPosition > 50 {
+            if let query = currentQuery {
+                fetchData(query, fetchNextPage: true)
+            }
+        }
     }
 
     // MARK: - Detail view controller delegate
