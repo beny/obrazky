@@ -63,7 +63,7 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
             currentDataPage = 1
 
             // scroll to begining
-            collectionView?.scrollRectToVisible(CGRectZero, animated: true)
+            collectionView?.scrollRectToVisible(CGRectMake(1, 1, 1, 1), animated: true)
         }
 
         // save current query
