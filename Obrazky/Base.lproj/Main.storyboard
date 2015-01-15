@@ -10,7 +10,7 @@
         <scene sceneID="KHX-iz-Ipg">
             <objects>
                 <collectionViewController id="m3o-VD-E1V" customClass="RootViewController" customModule="Obrazky" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" id="lpL-FH-K8q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" id="lpL-FH-K8q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,7 +72,7 @@
                                     <outlet property="imageView" destination="kFt-rK-wCH" id="Ige-ZO-GmV"/>
                                     <outlet property="sizeLabel" destination="QnN-Sq-Zi3" id="PbS-fD-7yJ"/>
                                     <outlet property="titleLabel" destination="eCA-90-6ea" id="964-dR-sV0"/>
-                                    <segue destination="NT9-TP-FGO" kind="showDetail" id="8Ig-Dl-EbO"/>
+                                    <segue destination="NT9-TP-FGO" kind="presentation" id="8Ig-Dl-EbO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

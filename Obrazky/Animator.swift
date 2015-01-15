@@ -32,7 +32,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning, UIViewControlle
         let rootController = fromNavigationController.topViewController as RootViewController
         let toNavigationController = context.viewControllerForKey(UITransitionContextToViewControllerKey)! as UINavigationController
         let detailController = toNavigationController.topViewController as DetailViewController
-        let photoController = detailController.viewControllers.first as PhotoViewController
+        let photoController = (detailController.viewControllers as NSArray).firstObject as PhotoViewController
 
         // add both controllers to container
         let container = context.containerView()
@@ -74,7 +74,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning, UIViewControlle
 
         let fromNavigationController = context.viewControllerForKey(UITransitionContextFromViewControllerKey)! as UINavigationController
         let detailController = fromNavigationController.topViewController as DetailViewController
-        let photoController = detailController.viewControllers.first as PhotoViewController
+        let photoController = (detailController.viewControllers as NSArray).firstObject as PhotoViewController
         let toNavigationController = context.viewControllerForKey(UITransitionContextToViewControllerKey)! as UINavigationController
         let rootController = toNavigationController.topViewController as RootViewController
 

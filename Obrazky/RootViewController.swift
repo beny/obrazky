@@ -31,8 +31,11 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                 navigationController.transitioningDelegate = animator
                 let detailController = navigationController.topViewController as DetailViewController
                 detailController.detailDelegate = self
-                detailController.selectedImage = image
                 detailController.images = images
+
+                // prepare starting view controller
+                let viewController = detailController.viewControllerForImage(image)
+                detailController.setViewControllers([viewController], direction: .Forward, animated: false, completion: nil)
 
                 selectedImageView = cell.imageView
             }
@@ -58,6 +61,9 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         }
         else {
             currentDataPage = 1
+
+            // scroll to begining
+            collectionView?.scrollRectToVisible(CGRectZero, animated: true)
         }
 
         // save current query
@@ -95,11 +101,15 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
                     // append new
                     if let images = Resource.parseData(JSON) {
                         for image in images {
-                            self.images.append(image)
+                            if find(self.images, image) == nil {
+                                self.images.append(image)
+                            }
                         }
                     }
                 }
             }
+
+            // reload data and indicate the change
             self.collectionView?.reloadData()
             self.collectionView?.flashScrollIndicators()
         })
@@ -120,6 +130,8 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     }
 
     func findImageCell(image: Image) -> ImageCell? {
+
+        // look for image cell (optional, because the cell doesn't have to be visible)
         if let imageIndex = find(images, image) {
             let indexPath = NSIndexPath(forRow: imageIndex, inSection: 0)
             let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? ImageCell
@@ -140,7 +152,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
         let image = images[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as ImageCell
         cell.imageView.contentMode = .ScaleAspectFill
-        // obrazkyURL?.imageURL(Int(UIScreen.mainScreen().nativeBounds.size.width)
         cell.imageView.setImageWithURL(image.originURL, placeholderImage: UIImage(named: "default-placeholder"))
         cell.titleLabel.text = image.title
         cell.sizeLabel.text = "\(Int(image.size.width))x\(Int(image.size.height))"
@@ -152,7 +163,6 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 
         let image = images[indexPath.row]
-
 
         let screenSize = UIScreen.mainScreen().bounds.size
         var width = screenSize.width
@@ -173,6 +183,7 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
     }
 
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        // animate change
         collectionView?.performBatchUpdates(nil, completion: nil)
     }
 
@@ -180,6 +191,7 @@ class RootViewController: UICollectionViewController, UISearchBarDelegate, UICol
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
+        // search only when something is entered
         if searchText.isEmpty {
             images.removeAll(keepCapacity: false)
             self.collectionView?.reloadData()

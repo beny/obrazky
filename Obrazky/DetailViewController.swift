@@ -15,7 +15,6 @@ protocol DetailViewControllerDelegate {
 class DetailViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     var images: Array<Image> = [Image]()
-    var selectedImage: Image?
     var startingTimer: NSTimer?
     var detailDelegate: DetailViewControllerDelegate?
 
@@ -31,12 +30,6 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
         // data source and delegate is myself
         dataSource = self
         delegate = self
-
-        // prepare starting view controller
-        if let image = selectedImage {
-            let viewController = viewControllerForImage(image)
-            setViewControllers([viewController], direction: .Forward, animated: false, completion: nil)
-        }
 
         // add tap gesture recognizer
         let recognizer = UITapGestureRecognizer(target: self, action: Selector("toggleBarVisibility:"))
@@ -65,7 +58,7 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
     }
 
     @IBAction func shareCurrentImage() {
-        if let photoController = viewControllers.last as? PhotoViewController {
+        if let photoController = (viewControllers as NSArray).lastObject as? PhotoViewController {
             if let image = photoController.imageView.image {
                 let items = [image]
                 let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -100,7 +93,7 @@ class DetailViewController: UIPageViewController, UIPageViewControllerDataSource
     }
 
     func currentViewController() -> PhotoViewController? {
-        return viewControllers.first as? PhotoViewController
+        return (viewControllers as NSArray).firstObject as? PhotoViewController
     }
 
     // MARK: - Page view controller data source

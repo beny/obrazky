@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         #if DEBUG
-        AFNetworkActivityLogger.sharedLogger().startLogging()
+            AFNetworkActivityLogger.sharedLogger().startLogging()
         #endif
         return true
     }
