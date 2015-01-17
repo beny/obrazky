@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             AFNetworkActivityLogger.sharedLogger().startLogging()
         #endif
+        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return true
     }
 
